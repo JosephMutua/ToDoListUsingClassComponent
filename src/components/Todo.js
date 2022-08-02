@@ -27,7 +27,11 @@ export default class Todo extends Component {
         this.setState({
             todos : this.state.todos.concat(obj)
         })
+        
     }
+    this.setState({
+        value: ''
+    })
     }
     onChange = (e) => {
         this.setState({
