@@ -38,13 +38,25 @@ export default class Todo extends Component {
             value : e.target.value
         })
     }
+    onDelete(itemid){
+      console.log (itemid)
+      this.setState({
+        count : this.state.count - 1,
+        todos : this.state.todos.filter((item,index) => {
+          return index !== itemid
+        })
+
+      })
+      
+      
+    }
     
   render() {
     const todolist = this.state.todos.map(
         (todo,index) => (
             <li key = {index}>{todo.name}
             <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={()=> this.onDelete(index)}>Delete</button>
             </li>
         )
     )
