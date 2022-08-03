@@ -3,11 +3,15 @@ import React, { Component } from 'react'
 export default class Todo extends Component {
     constructor(props) {
       super(props)
+      this.inputRef = React.createRef()
     
       this.state = {
         todos : [],
         count : 0,
-        value : ''
+        value : '',
+        editing : false,
+        currentId : '',
+        currentValue : ''
          
       }
     }
@@ -22,11 +26,9 @@ export default class Todo extends Component {
         if (this.state.value !== ''){
         this.setState({
             count : this.state.count + 1,
+            todos : this.state.todos.concat(obj)
         });
 
-        this.setState({
-            todos : this.state.todos.concat(obj)
-        })
         
     }
     this.setState({
@@ -48,7 +50,9 @@ export default class Todo extends Component {
 
       })
       
-      
+    }
+    componentDidMount (){
+      this.inputRef.current.focus()
     }
     
   render() {
@@ -68,7 +72,7 @@ export default class Todo extends Component {
         placeholder = 'Enter the todo ....'
         value={this.state.value}
         onChange = {this.onChange}
-        />
+        ref ={this.inputRef}/>
         <button onClick={()=>{this.addTodolist()}}>Add</button>
         <ul>{todolist}</ul>
         <p>Remaing Todos: {this.state.count}</p>
